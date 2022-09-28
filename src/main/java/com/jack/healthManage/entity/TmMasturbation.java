@@ -1,6 +1,9 @@
 package com.jack.healthManage.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 //import io.swagger.annotations.ApiModel;
@@ -15,6 +18,8 @@ import java.time.LocalDateTime;
  * @since 2022-09-26
  */
 @TableName("tm_masturbation")
+@Data
+@NoArgsConstructor
 //@ApiModel(value = "TmMasturbation对象", description = "")
 public class TmMasturbation implements Serializable {
 
@@ -32,47 +37,8 @@ public class TmMasturbation implements Serializable {
 
     private Integer updateBy;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-    public LocalDateTime getHappenTime() {
-        return happenTime;
-    }
-
-    public void setHappenTime(LocalDateTime happenTime) {
+    public TmMasturbation(LocalDateTime happenTime) {
         this.happenTime = happenTime;
-    }
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-    }
-    public Integer getCreateBy() {
-        return createBy;
-    }
-
-    public void setCreateBy(Integer createBy) {
-        this.createBy = createBy;
-    }
-    public Integer getUpdateBy() {
-        return updateBy;
-    }
-
-    public void setUpdateBy(Integer updateBy) {
-        this.updateBy = updateBy;
     }
 
     @Override

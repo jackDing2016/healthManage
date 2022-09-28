@@ -2,7 +2,7 @@ package com.jack.healthManage.service;
 
 import com.jack.healthManage.entity.TmMasturbation;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.jack.healthManage.vo.MasturabationMonthlyVO;
+import com.jack.healthManage.vo.MasturbationMonthlyVO;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -24,10 +24,20 @@ public interface ITmMasturbationService extends IService<TmMasturbation> {
 
     void initialData();
 
-    List<MasturabationMonthlyVO> queryMasturabationMonthlyVOListByPeriod(LocalDate start, LocalDate end);
+    List<MasturbationMonthlyVO> queryMasturbationMonthlyVOListByPeriod(LocalDate start, LocalDate end);
 
-    List<MasturabationMonthlyVO> queryMasturabationMonthlyVOListByMonth( int year, int month );
+    List<MasturbationMonthlyVO> queryMasturbationMonthlyVOListByMonth(int year, int month );
 
-    List<MasturabationMonthlyVO> queryMasturabationMonthlyVOListByCurrentMonth();
+    List<MasturbationMonthlyVO> queryMasturbationMonthlyVOListByCurrentMonth();
+
+    Double calculateHowAverageLongOnce(List<TmMasturbation> masturbationList);
+
+    Double calculateHowAverageLongOneAllTime();
+
+    Long calculateHowLongFromLastOnceToNow();
+
+    Integer calculateMaxPeriodWithNoMasturbation(List<TmMasturbation> masturbationList);
+
+    Integer calculateMaxPeriodWithNoMasturbationAllTime();
 
 }

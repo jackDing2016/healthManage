@@ -8,6 +8,7 @@ class HealthManageApplicationTests {
 
 	@Test
 	void contextLoads() {
+		System.out.printf("higuy");
 	}
 
 }

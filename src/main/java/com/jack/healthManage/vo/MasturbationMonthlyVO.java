@@ -3,7 +3,7 @@ package com.jack.healthManage.vo;
 import lombok.Data;
 
 @Data
-public class MasturabationMonthlyVO implements java.io.Serializable {
+public class MasturbationMonthlyVO implements java.io.Serializable {
 
     private int year;
 

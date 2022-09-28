@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jack.healthManage.mapper.TmMasturbationMapper">
+
+    <resultMap id="resultMap" type="com.jack.healthManage.vo.MasturbationVO" >
+        <id column="id" property="id" />
+        <result column="happen_time" property="happenTime" />
+    </resultMap>
+
+    <select id="getLastMasturbationVO" resultMap="resultMap" >
+        select t1.id,
+               t1.happen_time
+        from tm_masturbation t1
+        where t1.happen_time = (select max(t2.happen_time)
+                                from tm_masturbation t2)
+    </select>
+
+</mapper>

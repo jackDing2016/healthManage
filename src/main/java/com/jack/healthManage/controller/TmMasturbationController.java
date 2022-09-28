@@ -1,11 +1,14 @@
 package com.jack.healthManage.controller;
 
 import com.jack.healthManage.service.ITmMasturbationService;
+import com.jack.healthManage.vo.MasturbationMonthlyVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.stereotype.Controller;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * <p>
@@ -38,6 +41,29 @@ public class TmMasturbationController {
     @ResponseBody String initialData() {
         masturbationService.initialData();
         return "success";
+    }
+
+    @GetMapping("/queryMasturbationMonthlyVOListByPeriod")
+    @ResponseBody
+    List<MasturbationMonthlyVO> queryMasturbationMonthlyVOListByPeriod(
+            @RequestParam @DateTimeFormat( iso = DateTimeFormat.ISO.DATE) LocalDate start,
+            @RequestParam @DateTimeFormat( iso = DateTimeFormat.ISO.DATE) LocalDate end ) {
+        return masturbationService.queryMasturbationMonthlyVOListByPeriod( start, end );
+    }
+
+    @GetMapping("/calculateHowAverageLongOneAllTime")
+    @ResponseBody Double calculateHowAverageLongOneAllTime(){
+        return masturbationService.calculateHowAverageLongOneAllTime();
+    }
+
+    @GetMapping("/calculateHowLongFromLastOnceToNow")
+    @ResponseBody Long calculateHowLongFromLastOnceToNow(){
+        return masturbationService.calculateHowLongFromLastOnceToNow();
+    }
+
+    @GetMapping("/calculateMaxPeriodWithNoMasturbationAllTime")
+    @ResponseBody Integer calculateMaxPeriodWithNoMasturbationAllTime(){
+        return masturbationService.calculateMaxPeriodWithNoMasturbationAllTime();
     }
 
 }
