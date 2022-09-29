@@ -2,6 +2,7 @@ package com.jack.healthManage.controller;
 
 import com.jack.healthManage.service.ITmMasturbationService;
 import com.jack.healthManage.vo.MasturbationMonthlyVO;
+import com.jack.healthManage.vo.MasturbationVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
@@ -64,6 +65,16 @@ public class TmMasturbationController {
     @GetMapping("/calculateMaxPeriodWithNoMasturbationAllTime")
     @ResponseBody Integer calculateMaxPeriodWithNoMasturbationAllTime(){
         return masturbationService.calculateMaxPeriodWithNoMasturbationAllTime();
+    }
+
+    @GetMapping( "/listAll" )
+    @ResponseBody List<MasturbationVO> listAll() {
+        return masturbationService.listAll();
+    }
+
+    @GetMapping("/getPageList")
+    @ResponseBody List<MasturbationVO> getPageList( @RequestParam Integer pageNumber, @RequestParam Integer pageSize ) {
+        return masturbationService.getPageList( pageSize, pageNumber );
     }
 
 }

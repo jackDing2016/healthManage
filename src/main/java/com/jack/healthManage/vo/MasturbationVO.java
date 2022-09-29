@@ -11,6 +11,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class MasturbationVO implements java.io.Serializable {
 
+    private Integer id;
+
     private LocalDateTime happenTime;
 
 }

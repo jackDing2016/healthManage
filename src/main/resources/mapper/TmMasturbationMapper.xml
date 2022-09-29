@@ -15,4 +15,11 @@
                                 from tm_masturbation t2)
     </select>
 
+    <select id="listAll" resultMap="resultMap">
+        select t1.id,
+               t1.happen_time
+        from tm_masturbation t1
+        order by t1.happen_time
+    </select>
+
 </mapper>

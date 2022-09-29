@@ -1,6 +1,7 @@
 package com.jack.healthManage.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.github.pagehelper.PageHelper;
 import com.jack.healthManage.entity.TmMasturbation;
 import com.jack.healthManage.mapper.TmMasturbationMapper;
 import com.jack.healthManage.service.ITmMasturbationService;
@@ -148,5 +149,16 @@ public class TmMasturbationServiceImpl extends ServiceImpl<TmMasturbationMapper,
     @Override
     public Integer calculateMaxPeriodWithNoMasturbationAllTime() {
         return calculateMaxPeriodWithNoMasturbation( list() );
+    }
+
+    @Override
+    public List<MasturbationVO> listAll() {
+        return baseMapper.listAll();
+    }
+
+    @Override
+    public List<MasturbationVO> getPageList(int pageSize, int pageNumber) {
+        PageHelper.startPage(pageNumber, pageSize);
+        return baseMapper.listAll();
     }
 }

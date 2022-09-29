@@ -4,6 +4,8 @@ import com.jack.healthManage.entity.TmMasturbation;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.jack.healthManage.vo.MasturbationVO;
 
+import java.util.List;
+
 /**
  * <p>
  *  Mapper 接口
@@ -15,5 +17,10 @@ import com.jack.healthManage.vo.MasturbationVO;
 public interface TmMasturbationMapper extends BaseMapper<TmMasturbation> {
 
     MasturbationVO getLastMasturbationVO();
+
+    List<MasturbationVO> listAll();
+
+
+
 
 }

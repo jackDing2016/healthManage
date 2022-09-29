@@ -3,6 +3,7 @@ package com.jack.healthManage.service;
 import com.jack.healthManage.entity.TmMasturbation;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.jack.healthManage.vo.MasturbationMonthlyVO;
+import com.jack.healthManage.vo.MasturbationVO;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -39,5 +40,9 @@ public interface ITmMasturbationService extends IService<TmMasturbation> {
     Integer calculateMaxPeriodWithNoMasturbation(List<TmMasturbation> masturbationList);
 
     Integer calculateMaxPeriodWithNoMasturbationAllTime();
+
+    List<MasturbationVO> listAll();
+
+    List<MasturbationVO> getPageList( int pageSize, int pageNumber );
 
 }
