@@ -77,4 +77,9 @@ public class TmMasturbationController {
         return masturbationService.getPageList( pageSize, pageNumber );
     }
 
+    @GetMapping( "/justTest" )
+    @ResponseBody String justTest() {
+        return "hi guy";
+    }
+
 }
