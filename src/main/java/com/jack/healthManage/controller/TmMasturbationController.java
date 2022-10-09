@@ -82,4 +82,9 @@ public class TmMasturbationController {
         return "hi guy";
     }
 
+    @GetMapping( "/justTestTwo" )
+    @ResponseBody MasturbationVO justTestTwo() {
+        return listAll().get( 0 );
+    }
+
 }
