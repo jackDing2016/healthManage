@@ -2,6 +2,7 @@ package com.jack.healthManage.controller;
 
 import com.jack.healthManage.service.ITmMasturbationService;
 import com.jack.healthManage.vo.MasturbationMonthlyVO;
+import com.jack.healthManage.vo.MasturbationStatisticsVO;
 import com.jack.healthManage.vo.MasturbationVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -85,6 +86,12 @@ public class TmMasturbationController {
     @GetMapping( "/justTestTwo" )
     @ResponseBody MasturbationVO justTestTwo() {
         return listAll().get( 0 );
+    }
+
+    @GetMapping( "/getMasturbationStatisticsVO" )
+    @ResponseBody
+    MasturbationStatisticsVO getMasturbationStatisticsVO() {
+        return masturbationService.getMasturbationStatisticsVO();
     }
 
 }

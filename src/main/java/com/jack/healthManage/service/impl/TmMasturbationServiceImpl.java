@@ -7,6 +7,7 @@ import com.jack.healthManage.mapper.TmMasturbationMapper;
 import com.jack.healthManage.service.ITmMasturbationService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jack.healthManage.vo.MasturbationMonthlyVO;
+import com.jack.healthManage.vo.MasturbationStatisticsVO;
 import com.jack.healthManage.vo.MasturbationVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -160,5 +161,14 @@ public class TmMasturbationServiceImpl extends ServiceImpl<TmMasturbationMapper,
     public List<MasturbationVO> getPageList(int pageSize, int pageNumber) {
         PageHelper.startPage(pageNumber, pageSize);
         return baseMapper.listAll();
+    }
+
+    @Override
+    public MasturbationStatisticsVO getMasturbationStatisticsVO() {
+        MasturbationStatisticsVO masturbationStatisticsVO = new MasturbationStatisticsVO();
+        masturbationStatisticsVO.setMaxPeriodWithNoMasturbation( calculateMaxPeriodWithNoMasturbationAllTime() );
+        masturbationStatisticsVO.setHowLongFromLastOnceToNow( calculateHowLongFromLastOnceToNow().intValue() );
+        masturbationStatisticsVO.setHowAverageLongOneAllTime( calculateHowAverageLongOneAllTime() );
+        return masturbationStatisticsVO;
     }
 }

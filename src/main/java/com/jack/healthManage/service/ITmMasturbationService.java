@@ -3,6 +3,7 @@ package com.jack.healthManage.service;
 import com.jack.healthManage.entity.TmMasturbation;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.jack.healthManage.vo.MasturbationMonthlyVO;
+import com.jack.healthManage.vo.MasturbationStatisticsVO;
 import com.jack.healthManage.vo.MasturbationVO;
 
 import java.time.LocalDate;
@@ -44,5 +45,7 @@ public interface ITmMasturbationService extends IService<TmMasturbation> {
     List<MasturbationVO> listAll();
 
     List<MasturbationVO> getPageList( int pageSize, int pageNumber );
+
+    MasturbationStatisticsVO getMasturbationStatisticsVO();
 
 }
