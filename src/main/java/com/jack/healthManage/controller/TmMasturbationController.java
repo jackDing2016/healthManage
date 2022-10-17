@@ -94,4 +94,14 @@ public class TmMasturbationController {
         return masturbationService.getMasturbationStatisticsVO();
     }
 
+    @GetMapping( "/getAnnualLimit" )
+    @ResponseBody Integer getAnnualLimit() {
+        return masturbationService.getAnnualLimit();
+    }
+
+    @GetMapping( "/getAnnualUsed" )
+    @ResponseBody Long getAnnualUsed() {
+        return masturbationService.getAnnualUsed();
+    }
+
 }

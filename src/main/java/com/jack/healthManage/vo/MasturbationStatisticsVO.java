@@ -11,4 +11,8 @@ public class MasturbationStatisticsVO implements java.io.Serializable {
 
     private int howLongFromLastOnceToNow;
 
+    private int annualLimit;
+
+    private int annualUsed;
+
 }

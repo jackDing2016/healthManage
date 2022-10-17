@@ -48,4 +48,8 @@ public interface ITmMasturbationService extends IService<TmMasturbation> {
 
     MasturbationStatisticsVO getMasturbationStatisticsVO();
 
+    Integer getAnnualLimit();
+
+    Long getAnnualUsed();
+
 }

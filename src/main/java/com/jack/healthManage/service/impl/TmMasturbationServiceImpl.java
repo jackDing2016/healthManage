@@ -120,7 +120,9 @@ public class TmMasturbationServiceImpl extends ServiceImpl<TmMasturbationMapper,
         LocalDateTime start = masturbationList.get(0).getHappenTime();
         LocalDateTime end = LocalDateTime.now();
         long days = Duration.between( start, end ).toDays();
-        return days * 1.0 / masturbationList.size() ;
+        double res =  days * 1.0 / masturbationList.size() ;
+        // keep 2 digit
+        return Math.round(res * 100.0) / 100.0;
     }
 
     @Override
@@ -169,6 +171,28 @@ public class TmMasturbationServiceImpl extends ServiceImpl<TmMasturbationMapper,
         masturbationStatisticsVO.setMaxPeriodWithNoMasturbation( calculateMaxPeriodWithNoMasturbationAllTime() );
         masturbationStatisticsVO.setHowLongFromLastOnceToNow( calculateHowLongFromLastOnceToNow().intValue() );
         masturbationStatisticsVO.setHowAverageLongOneAllTime( calculateHowAverageLongOneAllTime() );
+        masturbationStatisticsVO.setAnnualLimit( getAnnualLimit() );
+        masturbationStatisticsVO.setAnnualUsed( getAnnualUsed().intValue() );
         return masturbationStatisticsVO;
     }
+
+    @Override
+    public Integer getAnnualLimit() {
+        return 52;
+    }
+
+    @Override
+    public Long getAnnualUsed() {
+
+        LocalDateTime minOfCurrentYear = LocalDateTime.of(
+                LocalDateTime.now().getYear(), 1, 1, 0, 0, 0);
+        LocalDateTime maxOfCurrentYear = LocalDateTime.of(
+                LocalDateTime.now().getYear(), 12, 31, 23, 59, 59);
+
+        return count(new LambdaQueryWrapper<TmMasturbation>()
+                .gt(TmMasturbation::getHappenTime, minOfCurrentYear)
+                .lt(TmMasturbation::getHappenTime, maxOfCurrentYear)
+        );
+    }
+
 }
