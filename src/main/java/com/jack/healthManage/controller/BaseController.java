@@ -15,7 +15,7 @@ public class BaseController<T, IS extends IService<T>> implements IBaseControlle
 
     @PostMapping("/add")
     @Override
-    public void add(T t) {
+    public void add(@RequestBody T t) {
         is.save(t);
     }
 

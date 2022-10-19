@@ -29,7 +29,7 @@ public class TmSleep implements Serializable {
 
     private LocalDateTime createTime;
 
-    private Integer updateTime;
+    private LocalDateTime updateTime;
 
     private Integer createBy;
 

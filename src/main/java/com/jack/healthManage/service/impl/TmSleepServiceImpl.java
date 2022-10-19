@@ -52,7 +52,7 @@ public class TmSleepServiceImpl extends ServiceImpl<TmSleepMapper, TmSleep> impl
     public int getHowLongFromLastHighQualityToNow() {
         LambdaQueryWrapper<TmSleep> lambdaQueryWrapper =
                 new LambdaQueryWrapper<>();
-        lambdaQueryWrapper.eq( TmSleep::getStartTime, SleepQualityEnum.GOOD.getCode() );
+        lambdaQueryWrapper.eq( TmSleep::getSleepQuality, SleepQualityEnum.GOOD.getCode() );
         List<TmSleep> list = baseMapper.selectList( lambdaQueryWrapper);
         list.sort(Comparator.comparing( TmSleep::getStartTime ).reversed());
         return (int)Duration.between(list.get(0).getStartTime(), LocalDateTime.now()).toDays();
@@ -65,8 +65,8 @@ public class TmSleepServiceImpl extends ServiceImpl<TmSleepMapper, TmSleep> impl
 
     @Override
     public int getStayUpAnnualUsed() {
-        return (int) list().stream().filter( x -> x.getCreateTime().getHour() > 11 ||
-                        (x.getCreateTime().getHour() > 0 && x.getCreateTime().getHour() < 8)
+        return (int) list().stream().filter( x -> x.getStartTime().getHour() == 23 ||
+                        (x.getStartTime().getHour() > 0 && x.getStartTime().getHour() < 8)
                 ).count();
     }
 
@@ -83,6 +83,7 @@ public class TmSleepServiceImpl extends ServiceImpl<TmSleepMapper, TmSleep> impl
 
     @Override
     public int getMaxRecordWithContinuousHighQualityAllTime() {
-        return 0;
+
+        return getMaxRecordWithContinuousHighQuality(list());
     }
 }
