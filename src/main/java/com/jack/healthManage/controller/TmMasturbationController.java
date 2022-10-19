@@ -1,5 +1,6 @@
 package com.jack.healthManage.controller;
 
+import com.jack.healthManage.entity.TmMasturbation;
 import com.jack.healthManage.service.ITmMasturbationService;
 import com.jack.healthManage.vo.MasturbationMonthlyVO;
 import com.jack.healthManage.vo.MasturbationStatisticsVO;
@@ -22,26 +23,17 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/tmMasturbation")
-public class TmMasturbationController {
-
-    @Autowired
-    private ITmMasturbationService masturbationService;
-
-    @PostMapping( "/add" )
-    @ResponseBody String add() {
-        masturbationService.add();
-        return "success";
-    }
+public class TmMasturbationController extends BaseController<TmMasturbation, ITmMasturbationService> {
 
     @PostMapping( "/addByHappenTime" )
     @ResponseBody String addByHappenTime(@RequestParam LocalDateTime happenTime) {
-        masturbationService.add(happenTime);
+        is.add(happenTime);
         return "success";
     }
 
     @PostMapping( "/initialData" )
     @ResponseBody String initialData() {
-        masturbationService.initialData();
+        is.initialData();
         return "success";
     }
 
@@ -50,32 +42,32 @@ public class TmMasturbationController {
     List<MasturbationMonthlyVO> queryMasturbationMonthlyVOListByPeriod(
             @RequestParam @DateTimeFormat( iso = DateTimeFormat.ISO.DATE) LocalDate start,
             @RequestParam @DateTimeFormat( iso = DateTimeFormat.ISO.DATE) LocalDate end ) {
-        return masturbationService.queryMasturbationMonthlyVOListByPeriod( start, end );
+        return is.queryMasturbationMonthlyVOListByPeriod( start, end );
     }
 
     @GetMapping("/calculateHowAverageLongOneAllTime")
     @ResponseBody Double calculateHowAverageLongOneAllTime(){
-        return masturbationService.calculateHowAverageLongOneAllTime();
+        return is.calculateHowAverageLongOneAllTime();
     }
 
     @GetMapping("/calculateHowLongFromLastOnceToNow")
     @ResponseBody Long calculateHowLongFromLastOnceToNow(){
-        return masturbationService.calculateHowLongFromLastOnceToNow();
+        return is.calculateHowLongFromLastOnceToNow();
     }
 
     @GetMapping("/calculateMaxPeriodWithNoMasturbationAllTime")
     @ResponseBody Integer calculateMaxPeriodWithNoMasturbationAllTime(){
-        return masturbationService.calculateMaxPeriodWithNoMasturbationAllTime();
+        return is.calculateMaxPeriodWithNoMasturbationAllTime();
     }
 
     @GetMapping( "/listAll" )
     @ResponseBody List<MasturbationVO> listAll() {
-        return masturbationService.listAll();
+        return is.listAll();
     }
 
     @GetMapping("/getPageList")
     @ResponseBody List<MasturbationVO> getPageList( @RequestParam Integer pageNumber, @RequestParam Integer pageSize ) {
-        return masturbationService.getPageList( pageSize, pageNumber );
+        return is.getPageList( pageSize, pageNumber );
     }
 
     @GetMapping( "/justTest" )
@@ -91,17 +83,17 @@ public class TmMasturbationController {
     @GetMapping( "/getMasturbationStatisticsVO" )
     @ResponseBody
     MasturbationStatisticsVO getMasturbationStatisticsVO() {
-        return masturbationService.getMasturbationStatisticsVO();
+        return is.getMasturbationStatisticsVO();
     }
 
     @GetMapping( "/getAnnualLimit" )
     @ResponseBody Integer getAnnualLimit() {
-        return masturbationService.getAnnualLimit();
+        return is.getAnnualLimit();
     }
 
     @GetMapping( "/getAnnualUsed" )
     @ResponseBody Long getAnnualUsed() {
-        return masturbationService.getAnnualUsed();
+        return is.getAnnualUsed();
     }
 
 }
