@@ -7,9 +7,15 @@ import java.time.LocalDateTime;
 @Data
 public class SleepVO implements java.io.Serializable {
 
-    private LocalDateTime startDate;
+    private Integer id;
 
-    private LocalDateTime endDate;
+    private LocalDateTime startTime;
+
+    private LocalDateTime endTime;
+
+    private Integer sleepQuality;
+
+    private String sleepQualityStr;
 
     private Double period;
 

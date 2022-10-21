@@ -35,7 +35,7 @@ public class TmSleep implements Serializable {
 
     private Integer updateBy;
 
-    private Integer SleepQuality;
+    private Integer sleepQuality;
 
 
     @Override

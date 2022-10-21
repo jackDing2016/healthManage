@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jack.healthManage.mapper.TmSleepMapper">
+
+    <resultMap id="resultMap" type="com.jack.healthManage.vo.SleepVO">
+        <id column="id" property="id"/>
+        <result column="start_time" property="startTime"/>
+        <result column="end_time" property="endTime"/>
+        <result column="sleep_quality" property="sleepQuality"/>
+    </resultMap>
+
+    <select id="listAll" resultMap="resultMap">
+        select ts.id,
+               ts.start_time,
+               ts.end_time,
+               ts.sleep_quality
+        from tm_sleep ts
+        order by ts.start_time desc
+    </select>
+
+</mapper>

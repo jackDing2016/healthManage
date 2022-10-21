@@ -1,13 +1,18 @@
 package com.jack.healthManage.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.generator.IFill;
 import com.jack.healthManage.constant.SleepQualityEnum;
+import com.jack.healthManage.dto.SleepAddDTO;
 import com.jack.healthManage.entity.TmSleep;
 import com.jack.healthManage.mapper.TmSleepMapper;
 import com.jack.healthManage.service.ITmSleepService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jack.healthManage.util.FunctionalEnumHelper;
 import com.jack.healthManage.vo.SleepStatisticsVO;
+import com.jack.healthManage.vo.SleepVO;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.time.Duration;
@@ -85,5 +90,34 @@ public class TmSleepServiceImpl extends ServiceImpl<TmSleepMapper, TmSleep> impl
     public int getMaxRecordWithContinuousHighQualityAllTime() {
 
         return getMaxRecordWithContinuousHighQuality(list());
+    }
+
+    @Override
+    public List<SleepVO> listAll() {
+        List<SleepVO> list = baseMapper.listAll();
+        if ( !CollectionUtils.isEmpty( list ) ) {
+            decorateVO( list );
+        }
+        return list;
+    }
+
+    private void decorateVO( List<SleepVO> list ) {
+
+        if ( !CollectionUtils.isEmpty( list ) ) {
+            for ( SleepVO sleepVO : list ) {
+                sleepVO.setSleepQualityStr(FunctionalEnumHelper.getEnum(SleepQualityEnum.class, SleepQualityEnum::getCode, sleepVO.getSleepQuality()).getName());
+            }
+        }
+
+    }
+
+    @Transactional
+    @Override
+    public void addByDTO(SleepAddDTO sleepAddDTO) {
+        TmSleep sleep = new TmSleep();
+        sleep.setSleepQuality( sleepAddDTO.getSleepQuality() );
+        sleep.setStartTime( sleepAddDTO.getStartTime() );
+        sleep.setEndTime( sleepAddDTO.getEndTime() );
+        save(sleep);
     }
 }

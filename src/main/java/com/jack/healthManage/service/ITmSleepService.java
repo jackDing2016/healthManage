@@ -1,8 +1,10 @@
 package com.jack.healthManage.service;
 
+import com.jack.healthManage.dto.SleepAddDTO;
 import com.jack.healthManage.entity.TmSleep;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.jack.healthManage.vo.SleepStatisticsVO;
+import com.jack.healthManage.vo.SleepVO;
 
 import java.util.List;
 
@@ -30,5 +32,8 @@ public interface ITmSleepService extends IService<TmSleep> {
 
     SleepStatisticsVO getSleepStatisticsVO();
 
+    List<SleepVO> listAll();
+
+    void addByDTO(SleepAddDTO sleepAddDTO);
 
 }

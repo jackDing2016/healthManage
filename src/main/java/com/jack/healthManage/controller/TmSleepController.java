@@ -3,10 +3,12 @@ package com.jack.healthManage.controller;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jack.healthManage.dto.SleepAddDTO;
 import com.jack.healthManage.entity.TmSleep;
 import com.jack.healthManage.service.ITmSleepService;
 import com.jack.healthManage.service.impl.TmSleepServiceImpl;
 import com.jack.healthManage.vo.SleepStatisticsVO;
+import com.jack.healthManage.vo.SleepVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,6 +45,17 @@ public class TmSleepController extends BaseController<TmSleep, ITmSleepService> 
     @GetMapping( "/test" )
     @ResponseBody String test( @RequestParam String name ) {
         return name;
+    }
+
+    @GetMapping( "/listALl" )
+    @ResponseBody List<SleepVO> listAll() {
+        return is.listAll();
+    }
+
+    @PostMapping( "/addByDTO" )
+    @ResponseBody String addByDTO(@RequestBody SleepAddDTO sleepAddDTO) {
+        is.addByDTO( sleepAddDTO );
+        return "success";
     }
 
 }
