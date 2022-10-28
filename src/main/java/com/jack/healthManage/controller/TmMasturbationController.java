@@ -26,7 +26,7 @@ import java.util.List;
 public class TmMasturbationController extends BaseController<TmMasturbation, ITmMasturbationService> {
 
     @PostMapping( "/addByHappenTime" )
-    @ResponseBody String addByHappenTime(@RequestParam LocalDateTime happenTime) {
+    @ResponseBody String addByHappenTime(@RequestParam @DateTimeFormat( iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime happenTime) {
         is.add(happenTime);
         return "success";
     }
